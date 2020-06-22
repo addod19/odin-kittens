@@ -40,6 +40,7 @@ module Api
           render json:  { status: 'ERROR', message:
           'Failed to update kitten', data: @kitten.errors},
           status: :ok
+        end
       end
     
       def destroy
@@ -70,7 +71,13 @@ module Api
           data: @kittens}, status: :ok
         end
       end
+
+      private
+
+      def kittens_params
+        params.require(:kitten).permit(:name, :age, :cuteness, :softness)
+      end
+      
     end
   end
 end
-    
