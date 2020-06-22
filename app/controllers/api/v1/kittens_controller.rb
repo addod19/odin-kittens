@@ -3,14 +3,16 @@ module Api
     class KittensController < ApplicationController
       def index
         @kittens = Kitten.all
-        render json: { status: 'SUCCESS', message: 'All kittens', data: @kittens}, status: :ok
+        render json: { status: 'SUCCESS',
+        message: 'All kittens', data: @kittens},
+        status: :ok
       end
     
       def create
         @kitten = Kitten.create(kitten_params)
         if @kitten
           render json:  { status: 'SUCCESS', message: 'Kitten added',
-          data: @kittens}, status: :ok
+          data: @kitten}, status: :ok
         else
           render json:  { status: 'ERROR', message:
           'Failed to add kitten', data: @kitten.errors},
@@ -22,7 +24,7 @@ module Api
         @kitten = Kitten.new(kitten_params)
         if @kitten.save
           render json:  { status: 'SUCCESS', message: 'Kitten added',
-          data: @kittens}, status: :ok
+          data: @kitten}, status: :ok
         else
           render json:  { status: 'ERROR', message:
           'Failed to add kitten', data: @kitten.errors},
@@ -35,7 +37,7 @@ module Api
         @kitten.update_attributes(kitten_params)
         if @kitten
           render json:  { status: 'SUCCESS', message: 'Kitten updated successfully',
-          data: @kittens}, status: :ok
+          data: @kitten}, status: :ok
         else
           render json:  { status: 'ERROR', message:
           'Failed to update kitten', data: @kitten.errors},
@@ -47,7 +49,7 @@ module Api
         @kitten = Kitten.find(params[:id])
         if @kitten.destroy
           render json:  { status: 'SUCCESS', message: 'Kitten deleted successfully',
-          data: @kittens}, status: :ok
+          data: @kitten}, status: :ok
         else
           render json:  { status: 'ERROR', message:
           'Failed to delete kitten', data: @kitten.errors},
@@ -57,18 +59,17 @@ module Api
     
       def show
         @kitten = Kitten.find(params[:id])
-        render json:  { status: 'SUCCESS', message: 'Kitten show successfully',
-        data: @kittens}, status: :ok
+        render json:  @kitten
       end
     
       def delete
         @kitten = Kitten.find(params[:id])
         if @kitten.destroy
           render json:  { status: 'SUCCESS', message: 'Kitten deleted successfully',
-          data: @kittens}, status: :ok
+          data: @kitten}, status: :ok
         else
           render json:  { status: 'ERROR', message: 'Kitten could not delete',
-          data: @kittens}, status: :ok
+          data: @kitten}, status: :ok
         end
       end
 
